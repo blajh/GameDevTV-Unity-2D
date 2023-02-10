@@ -7,7 +7,13 @@ public class FinishLine : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.name == "Player") {
-            SceneManager.LoadScene(0);
+            Invoke("ReloadScene", 2f);
         }
+    }
+
+    private void ReloadScene() {
+        Scene scene;
+        scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
