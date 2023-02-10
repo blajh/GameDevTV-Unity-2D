@@ -5,15 +5,26 @@ using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
-    [SerializeField] private float steerSpeed = 0.1f;
-    [SerializeField] private float moveSpeed = 0.01f;
+    [SerializeField] private float steerSpeed = 180f;
+    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float slowSpeed = 5f;
+    [SerializeField] private float boostSpeed = 15f;
+
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Camera cameraFollow;
     [SerializeField] private float packageDestroyDelay = 0.5f;
+    [SerializeField] private Color noPackageColor;
+    [SerializeField] private Color packageColor;
+
+    private SpriteRenderer spriteRenderer;
 
     private bool hasPackage = false;
 
     private Vector3 playerPosition;
+
+    private void Awake() {
+        spriteRenderer= GetComponent<SpriteRenderer>();
+    }
 
     private void Start() {
         
@@ -33,6 +44,7 @@ public class Driver : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         Debug.Log("we have collision");
         text.text = ("collision");
+        moveSpeed = slowSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -42,13 +54,17 @@ public class Driver : MonoBehaviour
                 Debug.Log("Package picked-up");
                 text.text = "Package";
                 Destroy(collision.gameObject, packageDestroyDelay);
+                spriteRenderer.color = packageColor;
             }
-        } else {
+        } else if (collision.gameObject.name == "Customer") {
             if (hasPackage) {
                 Debug.Log("Delivered to customer");
                 text.text = "Delivered!";
                 hasPackage = false;
+                spriteRenderer.color = noPackageColor;
             }
+        } else if (collision.gameObject.name == "SpeedUp") {
+            moveSpeed = boostSpeed;
         }
     }
 }
