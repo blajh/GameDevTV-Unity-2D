@@ -9,6 +9,9 @@ public class Driver : MonoBehaviour
     [SerializeField] private float moveSpeed = 0.01f;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Camera cameraFollow;
+    [SerializeField] private float packageDestroyDelay = 0.5f;
+
+    private bool hasPackage = false;
 
     private Vector3 playerPosition;
 
@@ -33,12 +36,19 @@ public class Driver : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.name == "Package") {
-            Debug.Log("Package picked-up");
-            text.text = "Package";
+        if (collision.gameObject.tag == "Package") {
+            if (!hasPackage) {
+                hasPackage = true;
+                Debug.Log("Package picked-up");
+                text.text = "Package";
+                Destroy(collision.gameObject, packageDestroyDelay);
+            }
         } else {
-            Debug.Log("Delivered to customer");
-            text.text = "Delivered!";
+            if (hasPackage) {
+                Debug.Log("Delivered to customer");
+                text.text = "Delivered!";
+                hasPackage = false;
+            }
         }
     }
 }
