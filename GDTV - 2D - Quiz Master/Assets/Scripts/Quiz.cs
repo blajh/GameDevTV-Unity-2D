@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-
 public class Quiz : MonoBehaviour {
     [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
@@ -51,8 +50,17 @@ public class Quiz : MonoBehaviour {
     void DisplayAnswer(int index) {
         Image buttonImage;
 
-        buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
-        buttonImage.sprite = correctAnswerSprite;
+        if (index == question.GetCorrectAnswerIndex()) {
+            questionText.text = "Correct!";
+            buttonImage = answerButtons[index].GetComponent<Image>();
+            buttonImage.sprite = correctAnswerSprite;
+        } else {
+            correctAnswerIndex = question.GetCorrectAnswerIndex();
+            string correctAnswer = question.GetAnswer(correctAnswerIndex);
+            questionText.text = "Sorry, the correct answer was;\n" + correctAnswer;
+            buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
+            buttonImage.sprite = correctAnswerSprite;
+        }
     }
 
     void GetNextQuestion() {
