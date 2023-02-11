@@ -1,22 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-
-    [SerializeField] private float timeToCompleteQuestion = 30f;
-    [SerializeField] private float timeToShowCorrectAnswer = 10f;
-
-    [SerializeField] private Image filledImage;
+    [SerializeField] float timeToCompleteQuestion = 30f;
+    [SerializeField] float timeToShowCorrectAnswer = 10f;
 
     public bool loadNextQuestion;
-    public bool isAnsweringQuestions = false;
-    
-    private float timerValue;
+    public float fillFraction;
+    public bool isAnsweringQuestion;
 
-    private void Update() {
+    float timerValue;
+
+    void Update() {
         UpdateTimer();
     }
 
@@ -24,33 +20,24 @@ public class Timer : MonoBehaviour {
         timerValue = 0;
     }
 
-    private void UpdateTimer() {
+    void UpdateTimer() {
         timerValue -= Time.deltaTime;
 
-        if (isAnsweringQuestions) {
+        if (isAnsweringQuestion) {
             if (timerValue > 0) {
-                ImageFill();
-            } else if (timerValue <= 0) {
-                isAnsweringQuestions = false;
+                fillFraction = timerValue / timeToCompleteQuestion;
+            } else {
+                isAnsweringQuestion = false;
                 timerValue = timeToShowCorrectAnswer;
             }
-        } else if (!isAnsweringQuestions) {
+        } else {
             if (timerValue > 0) {
-                ImageFill();
-            } else if (timerValue <= 0) {
-                isAnsweringQuestions = true;
+                fillFraction = timerValue / timeToShowCorrectAnswer;
+            } else {
+                isAnsweringQuestion = true;
                 timerValue = timeToCompleteQuestion;
                 loadNextQuestion = true;
             }
-        }        
-    }
-
-    private void ImageFill() {
-        if (isAnsweringQuestions) {
-            filledImage.fillAmount = timerValue / timeToCompleteQuestion;
-        } else if (!isAnsweringQuestions) {
-            filledImage.fillAmount = 1 - (timerValue / timeToShowCorrectAnswer);
         }
-        
     }
 }
