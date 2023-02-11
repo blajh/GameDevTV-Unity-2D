@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7385f735765d54cbbd89a375bae20c, type: 3}
   m_Name: QuestionSO_1
   m_EditorClassIdentifier: 
-  questionString: 'What game did Mario first appear in?
-
-'
+  question: What product did Nintendo first start selling?
+  answers:
+  - Playing cards
+  - Newspapers
+  - Baord games
+  - Dice
+  correctAnswerIndex: 0

@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7385f735765d54cbbd89a375bae20c, type: 3}
   m_Name: QuestionSO_5
   m_EditorClassIdentifier: 
-  questionString: 'What is the highest-grossing arcade game of all time?
+  question: 'What game did Mario first appear in?
 
 '
+  answers:
+  - Super Mario Bros
+  - Zelda
+  - Punch Out
+  - Donkey Kong
+  correctAnswerIndex: 3

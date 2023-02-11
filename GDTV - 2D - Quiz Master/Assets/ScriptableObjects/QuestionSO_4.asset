@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7385f735765d54cbbd89a375bae20c, type: 3}
   m_Name: QuestionSO_4
   m_EditorClassIdentifier: 
-  questionString: "Who is Jack Mitchell\u2019s best friend in \u201CCall of Duty:
-    Advanced Warfare?\u201D\r\n"
+  question: 'What is the highest-grossing arcade game of all time?
+
+'
+  answers:
+  - Super Mario
+  - Pac-Man
+  - Brick Breaker
+  - Breakout
+  correctAnswerIndex: 1
