@@ -485,7 +485,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -525,7 +525,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionText: {fileID: 1180265253}
-  questions: []
+  questions:
+  - {fileID: 11400000, guid: 1f94b2fe0c5a81c41a15f98fc4fec306, type: 2}
+  - {fileID: 11400000, guid: 25215fc24be82cc41a66a5221dd413dd, type: 2}
+  - {fileID: 11400000, guid: ed899bb6bf860bc47b9177f7cfecde5e, type: 2}
+  - {fileID: 11400000, guid: c765fb771690199489ce0e56e55c51ba, type: 2}
+  - {fileID: 11400000, guid: b1977b81ade240d42a3aec5a81964d48, type: 2}
   answerButtons:
   - {fileID: 973908613}
   - {fileID: 2057738977}
@@ -1281,7 +1286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCompleteQuestion: 30
-  timeToShowCorrectAnswer: 10
+  timeToShowCorrectAnswer: 3
   loadNextQuestion: 0
   fillFraction: 0
   isAnsweringQuestion: 0

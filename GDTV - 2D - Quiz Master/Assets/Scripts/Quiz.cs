@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System;
 
 public class Quiz : MonoBehaviour {
     [Header("Questions")]
@@ -72,9 +71,10 @@ public class Quiz : MonoBehaviour {
         }
     }
 
-    private void GetRandomQuestion() {
-        int index = UnityEngine.Random.Range(0, questions.Count);
+    void GetRandomQuestion() {
+        int index = Random.Range(0, questions.Count);
         currentQuestion = questions[index];
+
         if (questions.Contains(currentQuestion)) {
             questions.Remove(currentQuestion);
         }
