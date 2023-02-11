@@ -13,14 +13,15 @@ public class Quiz : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI questionText;
     [SerializeField] private Button[] answerButtons = new Button[MAX_ANSWERS_PER_QUESTION];
-    
     int correctAnswerIndex;
+    
     [SerializeField] private Sprite defaultAnswerSprite;
     [SerializeField] private Sprite correctAnswerSprite;
 
     private void Start() {
-        SetupCorrectIndex();        
-        DisplayQuestion();
+        SetupCorrectIndex();
+        GetNextQuestion();
+        //DisplayQuestion();
     }
 
     private void SetupCorrectIndex() {
@@ -51,21 +52,34 @@ public class Quiz : MonoBehaviour
 
     public void OnAnswerSelected(int index) {
         if (index == correctAnswerIndex) {
-            CorrectAnswer(index);
+            CorrectAnswer();
 
         } else {
             IncorrectAnswer();
         }
         SetButtonsState(false);
+        GetNextQuestion();
     }
 
-    private void CorrectAnswer(int index) {
+    private void CorrectAnswer() {
         questionText.text = "Correct";
-        answerButtons[index].GetComponent<Image>().sprite = correctAnswerSprite;
+        answerButtons[correctAnswerIndex].GetComponent<Image>().sprite = correctAnswerSprite;
     }
 
     private void IncorrectAnswer() {
         questionText.text = "The correct answer was:\n" + questionSO.GetAnswer(correctAnswerIndex);
         answerButtons[correctAnswerIndex].GetComponent<Image>().sprite = correctAnswerSprite;
+    }
+
+    private void GetNextQuestion() {
+        SetButtonsState(true);
+        SetDefaultButtonSprites();
+        DisplayQuestion();
+    }
+
+    private void SetDefaultButtonSprites() {
+        for (int i = 0; i < answerButtons.Length; i++) {
+            answerButtons[i].GetComponent<Image>().sprite = defaultAnswerSprite;
+        }
     }
 }
