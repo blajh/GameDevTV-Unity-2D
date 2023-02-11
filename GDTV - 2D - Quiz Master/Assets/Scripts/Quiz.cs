@@ -9,12 +9,16 @@ public class Quiz : MonoBehaviour
 {
     private const int MAX_ANSWERS_PER_QUESTION = 4;
 
+    [Header("Questions")]
     [SerializeField] private QuestionSO questionSO;
-
     [SerializeField] private TextMeshProUGUI questionText;
-    [SerializeField] private Button[] answerButtons = new Button[MAX_ANSWERS_PER_QUESTION];
-    int correctAnswerIndex;
     
+    int correctAnswerIndex;
+
+    [Header("Answers")]
+    [SerializeField] private Button[] answerButtons = new Button[MAX_ANSWERS_PER_QUESTION];
+
+    [Header("Button Sprites")]
     [SerializeField] private Sprite defaultAnswerSprite;
     [SerializeField] private Sprite correctAnswerSprite;
 
