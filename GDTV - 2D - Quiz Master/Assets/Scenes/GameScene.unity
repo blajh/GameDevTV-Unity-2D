@@ -485,7 +485,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -524,15 +524,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d557c435688471640a647ae07dd91b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionSO: {fileID: 11400000, guid: 1f94b2fe0c5a81c41a15f98fc4fec306, type: 2}
   questionText: {fileID: 1180265253}
+  questions: []
   answerButtons:
-  - {fileID: 973908615}
-  - {fileID: 2057738979}
-  - {fileID: 234835063}
-  - {fileID: 1887978600}
+  - {fileID: 973908613}
+  - {fileID: 2057738977}
+  - {fileID: 234835061}
+  - {fileID: 1887978598}
   defaultAnswerSprite: {fileID: 21300000, guid: d4345c37723c59c48a8183967fa56751, type: 3}
   correctAnswerSprite: {fileID: 21300000, guid: 0df106b972ea4b0469a61e388671bb60, type: 3}
+  timerImage: {fileID: 2099981127}
 --- !u!1 &804454581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,10 +1280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a311546e8e4b04c9abd46ee5175b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToCompleteQuestion: 3
-  timeToShowCorrectAnswer: 2
-  filledImage: {fileID: 2099981127}
-  isAnsweringQuestions: 0
+  timeToCompleteQuestion: 30
+  timeToShowCorrectAnswer: 10
+  loadNextQuestion: 0
+  fillFraction: 0
+  isAnsweringQuestion: 0
 --- !u!4 &1253294174
 Transform:
   m_ObjectHideFlags: 0
