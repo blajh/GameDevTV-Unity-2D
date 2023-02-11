@@ -12,21 +12,32 @@ public class Quiz : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI questionText;
     [SerializeField] private Button[] answerButtons = new Button[MAX_ANSWERS_PER_QUESTION];
-    [SerializeField] private TextMeshProUGUI[] answersTexts = new TextMeshProUGUI[MAX_ANSWERS_PER_QUESTION];
+    
+    int correctAnswerIndex;
+    [SerializeField] private Sprite defaultAnswerSprite;
+    [SerializeField] private Sprite correctAnswerSprite;
 
     private void Start() {
-        //SetupQuestion(); // Using text fields
-        SetupQuestionAlt(); // Using text fields as button children
+        correctAnswerIndex = questionSO.GetCorrectAnswerIndex();
+        SetupQuestion();
     }
 
-    private void SetupQuestion() {
-        SetQuestionText();
-        for (int i = 0; i < answersTexts.Length; i++) {
-            answersTexts[i].text = questionSO.GetAnswer(i);
+    private void Update() {
+        
+    }
+
+    public void OnAnswerSelected(int index) {
+        if (index == correctAnswerIndex) {
+            questionText.text = "Correct";
+            answerButtons[index].GetComponent<Image>().sprite = correctAnswerSprite;
+
+        } else {
+            questionText.text = "The correct answer was:\n" + questionSO.GetAnswer(correctAnswerIndex);
+            answerButtons[correctAnswerIndex].GetComponent<Image>().sprite = correctAnswerSprite;
         }
     }
 
-    private void SetupQuestionAlt() {
+    private void SetupQuestion() {
         SetQuestionText();
         for (int i = 0; i < answerButtons.Length; i++) {
             answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = questionSO.GetAnswer(i);
