@@ -9,12 +9,13 @@ public class PlayerMovement : MonoBehaviour
 {
     private const string IS_RUNNING = "isRunning";
 
-    Vector2 moveInput;
-    Rigidbody2D myRigidbody;
     [SerializeField] float moveSpeed = 4.0f;
     [SerializeField] Transform playerVisual;
-    Animator animator;
-    bool playerHasHorizontalSpeed;
+
+    private Vector2 moveInput;
+    private Rigidbody2D myRigidbody;
+    private Animator animator;
+    private bool playerHasHorizontalSpeed;
 
     private void Start() {
         myRigidbody= GetComponent<Rigidbody2D>();
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.velocity = playerVelocity;
     }
 
-    void OnMove(InputValue value) {
-        moveInput = value.Get<Vector2>();
+    private void OnMove(InputValue value) {
+        moveInput = value.Get<Vector2>();        
     }
 }
