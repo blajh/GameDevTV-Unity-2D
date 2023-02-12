@@ -1,111 +1,99 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
-{
-    private const string IS_RUNNING = "isRunning";
-    private const string IS_CLIMBING = "isClimbing";
-    private const string GROUND_LAYER_MASK = "Ground";
-    private const string CLIMBING_LAYER_MASK = "Climbing";
-    private const string ENEMIES_LAYER_MASK = "Enemies";
-
-    [SerializeField] float moveSpeed = 4.0f;
-    [SerializeField] float climbSpeed = 4.0f;
-    [SerializeField] private float jumpSpeed = 10f;
+public class PlayerMovement : MonoBehaviour {
+    [SerializeField] float runSpeed = 10f;
+    [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] float climbSpeed = 5f;
+    [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
     [SerializeField] Transform playerVisual;
 
-    private Vector2 moveInput;
-    private Rigidbody2D myRigidbody;
-    private Animator animator;
-    private bool playerHasHorizontalSpeed;
-    private bool playerHasVerticalSpeed;
-    private CapsuleCollider2D myCapsuleCollider2D;
-    private BoxCollider2D myBoxCollider2D;
-    private float myGravityScale;
+    Vector2 moveInput;
+    Rigidbody2D myRigidbody;
+    Animator myAnimator;
+    CapsuleCollider2D myBodyCollider;
+    BoxCollider2D myFeetCollider;
+    float gravityScaleAtStart;
 
-    private bool isInputWorking = true;
+    bool isAlive = true;
 
-    private void Start() {        
-        myRigidbody= GetComponent<Rigidbody2D>();
-        myGravityScale = myRigidbody.gravityScale;
-        animator = playerVisual.GetComponent<Animator>();
-        myCapsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        myBoxCollider2D = GetComponent<BoxCollider2D>();
+    void Start() {
+        myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = playerVisual.GetComponent<Animator>();
+        myBodyCollider = GetComponent<CapsuleCollider2D>();
+        myFeetCollider = GetComponent<BoxCollider2D>();
+        gravityScaleAtStart = myRigidbody.gravityScale;
     }
 
-    private void Update() {
-        IsMoving();
+    void Update() {
+        if (!isAlive) { return; }
         Run();
-        UpdateAnimation();
         FlipSprite();
         ClimbLadder();
-        
+        Die();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        LayerMask enemyLayerMask = LayerMask.GetMask(ENEMIES_LAYER_MASK);
-        isInputWorking = !myBoxCollider2D.IsTouchingLayers(enemyLayerMask) && !myCapsuleCollider2D.IsTouchingLayers(enemyLayerMask);        
+    void OnMove(InputValue value) {
+        if (!isAlive) { return; }
+        moveInput = value.Get<Vector2>();
     }
 
-    private void IsMoving() {
-        playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
-        playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
-    }
+    void OnJump(InputValue value) {
+        if (!isAlive) { return; }
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
 
-    private void Run() {
-        if (isInputWorking) {
-            Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.velocity.y);
-            myRigidbody.velocity = playerVelocity;
+        if (value.isPressed) {
+            // do stuff
+            myRigidbody.velocity += new Vector2(0f, jumpSpeed);
         }
     }
 
-    private void UpdateAnimation() {
-        animator.SetBool(IS_RUNNING, playerHasHorizontalSpeed && moveInput.x != 0);
-        animator.SetBool(IS_CLIMBING, IsOnLadder() && playerHasVerticalSpeed);
+    void Run() {
+        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = playerVelocity;
+
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
+
     }
 
-    private void FlipSprite() {        
+    void FlipSprite() {
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+
         if (playerHasHorizontalSpeed) {
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
         }
     }
 
-    private void ClimbLadder() {
-        if (IsOnLadder()) {
-            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
-            myRigidbody.velocity = playerVelocity;        
-        }
-        
-    }
-
-    private bool IsOnLadder() {
-        LayerMask climbingLayerMask = LayerMask.GetMask(CLIMBING_LAYER_MASK);
-
-        if (myCapsuleCollider2D.IsTouchingLayers(climbingLayerMask)) {
-            myRigidbody.gravityScale = 0;
-        } else if (!myCapsuleCollider2D.IsTouchingLayers(climbingLayerMask)) {
-            myRigidbody.gravityScale = myGravityScale;
+    void ClimbLadder() {
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"))) {
+            myRigidbody.gravityScale = gravityScaleAtStart;
+            myAnimator.SetBool("isClimbing", false);
+            return;
         }
 
-        return myCapsuleCollider2D.IsTouchingLayers(climbingLayerMask);
+        Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
+        myRigidbody.velocity = climbVelocity;
+        myRigidbody.gravityScale = 0f;
+
+        bool playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
+        myAnimator.SetBool("isClimbing", playerHasVerticalSpeed);
     }
 
-    private void OnJump(InputValue value) {
-        if (value.isPressed && IsGrounded() && isInputWorking) {
-            myRigidbody.velocity += new Vector2(0f, jumpSpeed);
+    void Die() {
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards"))) {
+            isAlive = false;
+            myAnimator.SetTrigger("Dying");
+            myRigidbody.velocity = deathKick;
+        }
+
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards"))) {
+            isAlive = false;
+            myAnimator.SetTrigger("Dying");
+            myRigidbody.velocity = deathKick;
         }
     }
 
-    private void OnMove(InputValue value) {
-        moveInput = value.Get<Vector2>();        
-    }
-
-    private bool IsGrounded() {
-        LayerMask groundLayerMask = LayerMask.GetMask(GROUND_LAYER_MASK);
-        return myBoxCollider2D.IsTouchingLayers(groundLayerMask);
-    }
 }
