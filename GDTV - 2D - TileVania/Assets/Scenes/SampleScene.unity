@@ -62560,11 +62560,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &1246638006 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5243004870138997957, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-  m_PrefabInstance: {fileID: 5243004870371072387}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1367602914
 GameObject:
   m_ObjectHideFlags: 0
@@ -62619,9 +62614,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5243004870138997958, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-      propertyPath: m_Name
-      value: PlayerVisual
+    - target: {fileID: 1466495907, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466495908, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
+      propertyPath: m_GravityScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466495908, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5243004871635151393, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
       propertyPath: m_RootOrder
@@ -62672,12 +62675,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7666248539245226906, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-      propertyPath: moveSpeed
-      value: 4
+      propertyPath: jumpSpeed
+      value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 7666248539245226906, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-      propertyPath: playerVisual
-      value: 
-      objectReference: {fileID: 1246638006}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}

@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private const string IS_RUNNING = "isRunning";
 
     [SerializeField] float moveSpeed = 4.0f;
+    [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] Transform playerVisual;
 
     private Vector2 moveInput;
@@ -46,6 +47,12 @@ public class PlayerMovement : MonoBehaviour
     private void Run() {
         Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVelocity;
+    }
+
+    private void OnJump(InputValue value) {
+        if (value.isPressed) {
+            myRigidbody.velocity += new Vector2(0f, jumpSpeed);
+        }
     }
 
     private void OnMove(InputValue value) {

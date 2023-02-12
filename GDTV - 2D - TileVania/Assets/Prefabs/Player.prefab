@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5243004870138997963}
   - component: {fileID: 5243004870138997956}
   m_Layer: 0
-  m_Name: PlayerSprite
+  m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,3 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ce0619a5edde945adc2d31fe5b1c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 4
+  jumpSpeed: 10
+  playerVisual: {fileID: 5243004870138997957}
