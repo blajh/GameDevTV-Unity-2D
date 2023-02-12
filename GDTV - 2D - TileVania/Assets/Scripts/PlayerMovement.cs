@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D myBoxCollider2D;
     private float myGravityScale;
 
-    private void Start() {
+    private void Start() {        
         myRigidbody= GetComponent<Rigidbody2D>();
         myGravityScale = myRigidbody.gravityScale;
         animator = playerVisual.GetComponent<Animator>();
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void UpdateAnimation() {
-        animator.SetBool(IS_RUNNING, playerHasHorizontalSpeed);
+        animator.SetBool(IS_RUNNING, playerHasHorizontalSpeed && moveInput.x != 0);
         animator.SetBool(IS_CLIMBING, IsOnLadder() && playerHasVerticalSpeed);
     }
 
