@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
     [SerializeField] Transform playerVisual;
+    [SerializeField] Transform bullet;
+    [SerializeField] Transform gun;
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
@@ -94,6 +96,11 @@ public class PlayerMovement : MonoBehaviour {
             myAnimator.SetTrigger("Dying");
             myRigidbody.velocity = deathKick;
         }
+    }
+
+    void OnFire() {
+        if (!isAlive) { return; }
+        Instantiate(bullet, gun.position, transform.rotation);
     }
 
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2178537473758245534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3190397369738370445}
+  m_Layer: 8
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3190397369738370445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178537473758245534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.319, y: 0.406, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5243004871635151393}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5243004870138997958
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +123,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1049166169
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -667220395, guid: c08c4ad1ac545474ba249b971fccbf04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -139,6 +170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5243004870138997957}
+  - {fileID: 3190397369738370445}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,10 +253,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ce0619a5edde945adc2d31fe5b1c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  climbSpeed: 4
+  runSpeed: 5
   jumpSpeed: 15
+  climbSpeed: 4
+  deathKick: {x: 20, y: 20}
   playerVisual: {fileID: 5243004870138997957}
+  bullet: {fileID: 6672556442695074770, guid: 42fee8b26e57d6b4abf86c242eb1b23a, type: 3}
+  gun: {fileID: 3190397369738370445}
 --- !u!61 &328967907
 BoxCollider2D:
   m_ObjectHideFlags: 0
