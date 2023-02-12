@@ -38,23 +38,14 @@ public class PlayerMovement : MonoBehaviour
         ClimbLadder();
     }
 
-    private void ClimbLadder() {
-        if (IsOnLadder()) {
-            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
-            myRigidbody.velocity = playerVelocity;
-        }
-        
-    }
-
-    private bool IsOnLadder() {
-        LayerMask climbingLayerMask = LayerMask.GetMask(CLIMBING_LAYER_MASK);
-        Debug.Log(myCollider2D.IsTouchingLayers(climbingLayerMask));
-        return myCollider2D.IsTouchingLayers(climbingLayerMask);
-    }
-
     private void IsMoving() {
         playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
+    }
+
+    private void Run() {
+        Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = playerVelocity;
     }
 
     private void UpdateAnimation() {
@@ -68,9 +59,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Run() {
-        Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
+    private void ClimbLadder() {
+        if (IsOnLadder()) {
+            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
+            myRigidbody.velocity = playerVelocity;
+        }
+        
+    }
+
+    private bool IsOnLadder() {
+        LayerMask climbingLayerMask = LayerMask.GetMask(CLIMBING_LAYER_MASK);        
+        return myCollider2D.IsTouchingLayers(climbingLayerMask);
     }
 
     private void OnJump(InputValue value) {
