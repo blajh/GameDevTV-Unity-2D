@@ -22,14 +22,16 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private bool playerHasHorizontalSpeed;
     private bool playerHasVerticalSpeed;
-    private Collider2D myCollider2D;
+    private CapsuleCollider2D myCapsuleCollider2D;
+    private BoxCollider2D myBoxCollider2D;
     private float myGravityScale;
 
     private void Start() {
         myRigidbody= GetComponent<Rigidbody2D>();
         myGravityScale = myRigidbody.gravityScale;
         animator = playerVisual.GetComponent<Animator>();
-        myCollider2D = GetComponent<Collider2D>();
+        myCapsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        myBoxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     private void Update() {
@@ -72,13 +74,13 @@ public class PlayerMovement : MonoBehaviour
     private bool IsOnLadder() {
         LayerMask climbingLayerMask = LayerMask.GetMask(CLIMBING_LAYER_MASK);
 
-        if (myCollider2D.IsTouchingLayers(climbingLayerMask)) {
+        if (myCapsuleCollider2D.IsTouchingLayers(climbingLayerMask)) {
             myRigidbody.gravityScale = 0;
-        } else if (!myCollider2D.IsTouchingLayers(climbingLayerMask)) {
+        } else if (!myCapsuleCollider2D.IsTouchingLayers(climbingLayerMask)) {
             myRigidbody.gravityScale = myGravityScale;
         }
 
-        return myCollider2D.IsTouchingLayers(climbingLayerMask);
+        return myCapsuleCollider2D.IsTouchingLayers(climbingLayerMask);
     }
 
     private void OnJump(InputValue value) {
@@ -93,6 +95,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded() {
         LayerMask groundLayerMask = LayerMask.GetMask(GROUND_LAYER_MASK);
-        return myCollider2D.IsTouchingLayers(groundLayerMask);
+        return myBoxCollider2D.IsTouchingLayers(groundLayerMask);
     }
 }
