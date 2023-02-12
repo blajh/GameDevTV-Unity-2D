@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private const string IS_CLIMBING = "isClimbing";
     private const string GROUND_LAYER_MASK = "Ground";
     private const string CLIMBING_LAYER_MASK = "Climbing";
+    private const string ENEMIES_LAYER_MASK = "Enemies";
 
     [SerializeField] float moveSpeed = 4.0f;
     [SerializeField] float climbSpeed = 4.0f;
@@ -26,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D myBoxCollider2D;
     private float myGravityScale;
 
+    private bool isInputWorking = true;
+
     private void Start() {        
         myRigidbody= GetComponent<Rigidbody2D>();
         myGravityScale = myRigidbody.gravityScale;
@@ -40,6 +43,12 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimation();
         FlipSprite();
         ClimbLadder();
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        LayerMask enemyLayerMask = LayerMask.GetMask(ENEMIES_LAYER_MASK);
+        isInputWorking = !myBoxCollider2D.IsTouchingLayers(enemyLayerMask) && !myCapsuleCollider2D.IsTouchingLayers(enemyLayerMask);        
     }
 
     private void IsMoving() {
@@ -48,8 +57,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Run() {
-        Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
+        if (isInputWorking) {
+            Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.velocity.y);
+            myRigidbody.velocity = playerVelocity;
+        }
     }
 
     private void UpdateAnimation() {
@@ -84,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnJump(InputValue value) {
-        if (value.isPressed && IsGrounded()) {
+        if (value.isPressed && IsGrounded() && isInputWorking) {
             myRigidbody.velocity += new Vector2(0f, jumpSpeed);
         }
     }
