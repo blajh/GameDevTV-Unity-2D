@@ -69570,17 +69570,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7666248539245226906, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-      propertyPath: runSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7666248539245226906, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-      propertyPath: deathKick.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7666248539245226906, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
-      propertyPath: deathKick.y
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18dda8d06fcb5fb439b54ac6f7f2e076, type: 3}
