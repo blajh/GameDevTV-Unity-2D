@@ -8,9 +8,12 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private const string IS_RUNNING = "isRunning";
+    private const string IS_CLIMBING = "isClimbing";
     private const string GROUND_LAYER_MASK = "Ground";
+    private const string CLIMBING_LAYER_MASK = "Climbing";
 
     [SerializeField] float moveSpeed = 4.0f;
+    [SerializeField] float climbSpeed = 4.0f;
     [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] Transform playerVisual;
 
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Animator animator;
     private bool playerHasHorizontalSpeed;
+    private bool playerHasVerticalSpeed;
     private Collider2D myCollider2D;
 
     private void Start() {
@@ -27,18 +31,35 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
-        IsMoving();        
+        IsMoving();
         Run();
         UpdateAnimation();
         FlipSprite();
+        ClimbLadder();
+    }
+
+    private void ClimbLadder() {
+        if (IsOnLadder()) {
+            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, moveInput.y * climbSpeed);
+            myRigidbody.velocity = playerVelocity;
+        }
+        
+    }
+
+    private bool IsOnLadder() {
+        LayerMask climbingLayerMask = LayerMask.GetMask(CLIMBING_LAYER_MASK);
+        Debug.Log(myCollider2D.IsTouchingLayers(climbingLayerMask));
+        return myCollider2D.IsTouchingLayers(climbingLayerMask);
     }
 
     private void IsMoving() {
         playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
     }
 
     private void UpdateAnimation() {
-        animator.SetBool(IS_RUNNING, playerHasHorizontalSpeed);        
+        animator.SetBool(IS_RUNNING, playerHasHorizontalSpeed);
+        animator.SetBool(IS_CLIMBING, IsOnLadder() && playerHasVerticalSpeed);
     }
 
     private void FlipSprite() {        
