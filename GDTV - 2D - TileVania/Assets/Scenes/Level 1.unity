@@ -57984,6 +57984,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 6384902f350d6b148bd499f2c37969ea, type: 3}
     - target: {fileID: 246272954, guid: be9ea8340fe702b41a94023104283897, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 246272954, guid: be9ea8340fe702b41a94023104283897, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -58120,6 +58124,10 @@ PrefabInstance:
       propertyPath: coinPickupSFX
       value: 
       objectReference: {fileID: 8300000, guid: 6384902f350d6b148bd499f2c37969ea, type: 3}
+    - target: {fileID: 246272954, guid: be9ea8340fe702b41a94023104283897, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 246272954, guid: be9ea8340fe702b41a94023104283897, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -58772,18 +58780,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2013035175}
     m_Modifications:
-    - target: {fileID: 246272953, guid: be9ea8340fe702b41a94023104283897, type: 3}
-      propertyPath: coinPickupSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 6384902f350d6b148bd499f2c37969ea, type: 3}
-    - target: {fileID: 246272954, guid: be9ea8340fe702b41a94023104283897, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 246272954, guid: be9ea8340fe702b41a94023104283897, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 66568935518751477, guid: be9ea8340fe702b41a94023104283897, type: 3}
       propertyPath: m_Name
       value: Coin
@@ -58929,13 +58925,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.21
       objectReference: {fileID: 0}
+    - target: {fileID: 4430457417904415561, guid: 5feab87d1a6ba7349b1dde9471f70443, type: 3}
+      propertyPath: orthographic size
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4430457417904415670, guid: 5feab87d1a6ba7349b1dde9471f70443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.2781658
+      value: -2.3892832
       objectReference: {fileID: 0}
     - target: {fileID: 4430457417904415670, guid: 5feab87d1a6ba7349b1dde9471f70443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5512285
+      value: 3.0544508
       objectReference: {fileID: 0}
     - target: {fileID: 4430457418758965050, guid: 5feab87d1a6ba7349b1dde9471f70443, type: 3}
       propertyPath: m_LocalPosition.x
