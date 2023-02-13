@@ -256,7 +256,7 @@ MonoBehaviour:
   runSpeed: 5
   jumpSpeed: 15
   climbSpeed: 4
-  deathKick: {x: 20, y: 20}
+  deathKick: {x: 10, y: 10}
   playerVisual: {fileID: 5243004870138997957}
   bullet: {fileID: 6672556442695074770, guid: 42fee8b26e57d6b4abf86c242eb1b23a, type: 3}
   gun: {fileID: 3190397369738370445}
