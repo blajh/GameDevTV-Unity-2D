@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
+    private const string TAG_PLAYER = "Player";
     [SerializeField] private float levelLoadDelay = 1.0f;
     [SerializeField] private int numberOflevels = 3;
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        StartCoroutine(LoadNextLevel());
+        if (collision.gameObject.tag == TAG_PLAYER) {
+            StartCoroutine(LoadNextLevel());
+        }
     }
 
     IEnumerator LoadNextLevel() {
