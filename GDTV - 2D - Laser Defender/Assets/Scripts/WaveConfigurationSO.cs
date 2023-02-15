@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Profiling;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Animations;
+
 
 [CreateAssetMenu(menuName = "Wave Configuration SO", fileName = "New Wave Configuration SO")]
 public class WaveConfigurationSO : ScriptableObject
@@ -40,7 +37,8 @@ public class WaveConfigurationSO : ScriptableObject
     }
 
     public float GetRandomSpawnTime() {
-        float spawnTime = Random.Range(timeBetweenEnemySpawns - spawnTimeVariance, timeBetweenEnemySpawns + spawnTimeVariance);
+        float spawnTime = Random.Range(timeBetweenEnemySpawns - spawnTimeVariance,
+                                       timeBetweenEnemySpawns + spawnTimeVariance);
         return Mathf.Clamp(spawnTime, minimumSpawnTime, float.MaxValue);
     }
 }

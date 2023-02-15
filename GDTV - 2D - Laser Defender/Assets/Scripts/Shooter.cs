@@ -1,18 +1,30 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    [Header("Projectile")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float projectileLifetime = 5f;
-    [SerializeField] private float firingRate = .2f;
 
-    public bool isFiring;
+    [Header("Fire Rate")]
+    [SerializeField] private float baseFiringRate = .2f;
+    [SerializeField] private float firingRateVariance = 0f;
+    [SerializeField] private float minimumFiringRate = 0.2f;
+
+    [Header("AI")]
+    [SerializeField] private bool useAI;
+
+    [HideInInspector] public bool isFiring;
+
     private Coroutine firingCoroutine;
+
+    private void Start() {
+        if(useAI) {
+            isFiring = true;
+        }
+    }
 
     private void Update() {
         Fire();
@@ -38,7 +50,13 @@ public class Shooter : MonoBehaviour
                 my_rb.velocity = transform.up * projectileSpeed;
             }
             Destroy(instance, projectileLifetime);
-            yield return new WaitForSeconds(firingRate);
+            yield return new WaitForSeconds(GetRandomFireRate());
         } while (isFiring);
+    }
+
+    public float GetRandomFireRate() {
+        float spawnTime = Random.Range(baseFiringRate - firingRateVariance,
+                                       baseFiringRate + firingRateVariance);
+        return Mathf.Clamp(baseFiringRate, minimumFiringRate, float.MaxValue);
     }
 }

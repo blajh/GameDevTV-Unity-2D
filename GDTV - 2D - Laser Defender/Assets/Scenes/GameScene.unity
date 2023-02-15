@@ -154,6 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveConfigurationSOs:
   - {fileID: 11400000, guid: 1243666c4bba58a4887170b90eb4f79a, type: 2}
+  - {fileID: 11400000, guid: ff972fa6348e19a4e8f02253456de1ff, type: 2}
+  - {fileID: 11400000, guid: 1243666c4bba58a4887170b90eb4f79a, type: 2}
+  - {fileID: 11400000, guid: ff972fa6348e19a4e8f02253456de1ff, type: 2}
   timeBetweenWaves: 0
   isLooping: 1
 --- !u!4 &394449857

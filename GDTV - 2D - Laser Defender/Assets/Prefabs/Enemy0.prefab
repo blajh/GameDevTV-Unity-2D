@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5291799131960227601}
   - component: {fileID: 4609986192126941627}
   - component: {fileID: -7894496064381596716}
+  - component: {fileID: 2081894847183302332}
   m_Layer: 7
   m_Name: Enemy0
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7335032642034756864}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +37,7 @@ Transform:
   - {fileID: 7412353947423591366}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3479799071049100111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +140,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: 25
+--- !u!114 &2081894847183302332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335032642034756864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d7bb29052a75c4fb48d3511fa174da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8524619904205798844, guid: d3aa894cdba2644468530d2eac355bf9, type: 3}
+  projectileSpeed: 6
+  projectileLifetime: 5
+  baseFiringRate: 1
+  firingRateVariance: 0.7
+  minimumFiringRate: 0.3
+  useAI: 1
+  isFiring: 0
 --- !u!1 &9195656467330082979
 GameObject:
   m_ObjectHideFlags: 0
