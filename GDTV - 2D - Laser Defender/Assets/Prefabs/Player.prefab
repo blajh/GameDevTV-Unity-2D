@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4244764992842858012}
   - component: {fileID: 3803868277474797766}
   - component: {fileID: 2723421280681714351}
+  - component: {fileID: 1117999996958454340}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -201,6 +202,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+--- !u!114 &1117999996958454340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498330019391947495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d7bb29052a75c4fb48d3511fa174da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8524619904205798844, guid: 0eeef8e9347914d4dbd56ffac2cba2be, type: 3}
+  projectileSpeed: 10
+  projectileLifetime: 5
+  firingRate: 0.1
+  isFiring: 0
 --- !u!1 &6440344660956497561
 GameObject:
   m_ObjectHideFlags: 0
