@@ -20,11 +20,17 @@ public class Health : MonoBehaviour
     private float sloMoTimer = 0f;
     private bool gotHit = false;
 
+    [Header("Score Points per Death")]
+    [SerializeField] bool isPlayer = false;
+    [SerializeField] private int scorePerDeath = 10;
+
     private AudioPlayer audioPlayer;
+    private ScoreKeeper scoreKeeper;
 
     private void Awake() {
         audioPlayer = FindObjectOfType<AudioPlayer>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -48,8 +54,15 @@ public class Health : MonoBehaviour
     private void TakeDamage(int damageValue) {
         health -= damageValue;
         if(health <= 0) {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die() {
+        if (!isPlayer) {
+            scoreKeeper.ModifyScore(scorePerDeath);
+        }
+        Destroy(gameObject);
     }
 
     private void PlayExplosionFX() {
@@ -73,5 +86,9 @@ public class Health : MonoBehaviour
             gotHit = false;
             sloMoTimer = 0f;
         }
+    }
+
+    public int GetHealth() {
+        return health;
     }
 }
