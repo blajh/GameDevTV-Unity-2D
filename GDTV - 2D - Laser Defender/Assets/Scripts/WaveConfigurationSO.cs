@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -10,6 +11,9 @@ public class WaveConfigurationSO : ScriptableObject
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private Transform pathPrefab;
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float timeBetweenEnemySpawns = 1f;
+    [SerializeField] private float spawnTimeVariance = 0f;
+    [SerializeField] private float minimumSpawnTime = 0.2f;
 
     public int GetEnemyCount() {
         return enemyPrefabs.Count;
@@ -33,5 +37,10 @@ public class WaveConfigurationSO : ScriptableObject
 
     public float GetMoveSpeed() {
         return moveSpeed;
+    }
+
+    public float GetRandomSpawnTime() {
+        float spawnTime = Random.Range(timeBetweenEnemySpawns - spawnTimeVariance, timeBetweenEnemySpawns + spawnTimeVariance);
+        return Mathf.Clamp(spawnTime, minimumSpawnTime, float.MaxValue);
     }
 }
