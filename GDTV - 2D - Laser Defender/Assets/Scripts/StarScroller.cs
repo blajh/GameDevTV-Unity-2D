@@ -8,6 +8,8 @@ public class StarScroller : MonoBehaviour
     [SerializeField] private Vector2 moveSpeed;
     [SerializeField] private float upperBound;
     [SerializeField] private float lowerBound;
+    [SerializeField] private float rightBound;
+    [SerializeField] private float leftBound;
 
     private void Update() {
         Move();
@@ -20,7 +22,7 @@ public class StarScroller : MonoBehaviour
 
     private void CheckPosition() {
         if (transform.position.y <= lowerBound) {
-            transform.position = new Vector3 (transform.position.x, upperBound, transform.position.z);
+            transform.position = new Vector3 (UnityEngine.Random.Range(leftBound, rightBound), upperBound, transform.position.z);
         }
     }
 }

@@ -9,6 +9,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float timeBetweenWaves = 0f;
     [SerializeField] private bool isLooping = true;
     private WaveConfigurationSO currentWave;
+    private int waveCount = 0;
+    private UIDisplay uiDisplay;
+
+    private void Awake() {
+        uiDisplay = FindObjectOfType<UIDisplay>();
+    }
 
     private void Start() {
         StartCoroutine(SpawnEnemyWaves());
@@ -21,6 +27,8 @@ public class EnemySpawner : MonoBehaviour
         do {
             foreach (WaveConfigurationSO waveConfigurationSO in waveConfigurationSOs) {
                 currentWave = waveConfigurationSO;
+                waveCount++;
+                uiDisplay.UpdateWave(waveCount);
                 for (int i = 0; i < currentWave.GetEnemyCount(); i++) {
                     Instantiate(currentWave.GetEnemyPrefab(i),
                                 currentWave.GetStartingWaypoint().position,

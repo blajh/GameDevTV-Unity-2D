@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -6,8 +7,9 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] private int health = 50;
+    [SerializeField] private int healthMax = 50;
     [SerializeField] private ParticleSystem explosionFX;
+    private int health;
 
     [Header("Camera Shake")]
     [SerializeField] private bool applyCameraShake = false;
@@ -26,8 +28,11 @@ public class Health : MonoBehaviour
 
     private AudioPlayer audioPlayer;
     private ScoreKeeper scoreKeeper;
+    private UIDisplay uiDisplay;
 
     private void Awake() {
+        health = healthMax;
+        uiDisplay = FindObjectOfType<UIDisplay>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -42,6 +47,13 @@ public class Health : MonoBehaviour
             ShakeCamera();
             gotHit = true;
             audioPlayer.PlayDamageTakenClip();
+            UpdateUI();
+        }
+    }
+
+    private void UpdateUI() {
+        if (isPlayer) {
+            uiDisplay.UpdateHealth(healthMax, health);
         }
     }
 
