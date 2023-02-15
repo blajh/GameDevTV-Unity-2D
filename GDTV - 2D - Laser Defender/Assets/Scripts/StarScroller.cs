@@ -20,7 +20,6 @@ public class StarScroller : MonoBehaviour
 
     private void CheckPosition() {
         if (transform.position.y <= lowerBound) {
-            Debug.Log(gameObject.name);
             transform.position = new Vector3 (transform.position.x, upperBound, transform.position.z);
         }
     }

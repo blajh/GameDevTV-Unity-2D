@@ -20,7 +20,10 @@ public class Health : MonoBehaviour
     private float sloMoTimer = 0f;
     private bool gotHit = false;
 
+    private AudioPlayer audioPlayer;
+
     private void Awake() {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
@@ -32,6 +35,7 @@ public class Health : MonoBehaviour
             damageDealer.Hit();
             ShakeCamera();
             gotHit = true;
+            audioPlayer.PlayDamageTakenClip();
         }
     }
 

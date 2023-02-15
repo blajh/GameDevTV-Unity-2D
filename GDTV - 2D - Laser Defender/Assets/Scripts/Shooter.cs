@@ -19,6 +19,11 @@ public class Shooter : MonoBehaviour
     [HideInInspector] public bool isFiring;
 
     private Coroutine firingCoroutine;
+    private AudioPlayer audioPlayer;
+
+    private void Awake() {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     private void Start() {
         if(useAI) {
@@ -50,6 +55,7 @@ public class Shooter : MonoBehaviour
                 my_rb.velocity = transform.up * projectileSpeed;
             }
             Destroy(instance, projectileLifetime);
+            audioPlayer.PlayShootingClip();
             yield return new WaitForSeconds(GetRandomFireRate());
         } while (isFiring);
     }
