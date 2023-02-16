@@ -502,6 +502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 893582165169301307, guid: 5375fd3a48a190241aaf101716f92bad, type: 3}
+      propertyPath: m_ScaleFactor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 893582165169301309, guid: 5375fd3a48a190241aaf101716f92bad, type: 3}
       propertyPath: m_Pivot.x
       value: 0
