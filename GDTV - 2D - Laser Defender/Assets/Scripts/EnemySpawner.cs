@@ -11,9 +11,11 @@ public class EnemySpawner : MonoBehaviour
     private WaveConfigurationSO currentWave;
     private int waveCount = 0;
     private UIDisplay uiDisplay;
+    private ScoreKeeper scoreKeeper;
 
     private void Awake() {
         uiDisplay = FindObjectOfType<UIDisplay>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     private void Start() {
@@ -29,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
                 currentWave = waveConfigurationSO;
                 waveCount++;
                 uiDisplay.UpdateWave(waveCount);
+                scoreKeeper.ModifyWave(1);
                 for (int i = 0; i < currentWave.GetEnemyCount(); i++) {
                     Instantiate(currentWave.GetEnemyPrefab(i),
                                 currentWave.GetStartingWaypoint().position,

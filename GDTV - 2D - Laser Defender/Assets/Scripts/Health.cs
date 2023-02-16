@@ -76,6 +76,7 @@ public class Health : MonoBehaviour
         if (!isPlayer) {
             scoreKeeper.ModifyScore(scorePerDeath);
         } else if (isPlayer) {
+            scoreKeeper.SetTimePlayed(Time.timeSinceLevelLoad);
             levelManager.LoadDeathScene();
         }
         Destroy(gameObject);
