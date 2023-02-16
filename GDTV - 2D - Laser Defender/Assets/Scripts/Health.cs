@@ -29,9 +29,11 @@ public class Health : MonoBehaviour
     private AudioPlayer audioPlayer;
     private ScoreKeeper scoreKeeper;
     private UIDisplay uiDisplay;
+    LevelManager levelManager;
 
     private void Awake() {
         health = healthMax;
+        levelManager = FindObjectOfType<LevelManager>();
         uiDisplay = FindObjectOfType<UIDisplay>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
@@ -73,6 +75,8 @@ public class Health : MonoBehaviour
     private void Die() {
         if (!isPlayer) {
             scoreKeeper.ModifyScore(scorePerDeath);
+        } else if (isPlayer) {
+            levelManager.LoadDeathScene();
         }
         Destroy(gameObject);
     }
